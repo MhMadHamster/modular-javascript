@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/bright/styles/screen.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Shower Presentation Engine</h1>
+		<p>Yours Truly, Famous Inc.</p>
+	</header>
+	<section class="slide shout" id="Cover"><div>
+		<h2>Модульный Javascript</h2>
+		<!-- <img src="pictures/cover.jpg" alt=""> -->
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#Cover,
+			#Problem {
+				background: #fff;
+			}
+			.cover h2 {
+				margin: 130px 0 0;
+				color: #000;
+				text-align: center;
+				font-size: 70px;
+			}
+			#Problem img {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 20%;
+				margin: auto;
+				z-index: 1;
+			}
+			#Problem h2 {
+				margin: 130px 0 0;
+				position: relative;
+				z-index: 2;
+			}
+			#Now {
+				background: #fff;
+			}
+			#Cover h2 {
+				color:#000;
+				text-align:center;
+				font-size:70px;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#FFF;
+				font-style:italic;
+				font-size:20px;
+				}
+				#Cover p a {
+					color:#FFF;
+					}
+			ul.no-style {
+				list-style-type: none;
+			}
+			ul.no-style > li:before {
+				content: '';
+			}
+		</style>
+	</div></section>
+	<section class="slide"><div>
+		<h2>План</h2>
+		<ol>
+			<li>Как сейчас</li>
+			<li>Проблема</li>
+			<li>Решение?</li>
+		</ol>
+	</div></section>
+	<section class="slide" id="Now"><div>
+		<h2>Как сейчас</h2>
+		<pre>
+			<code>ContentComposer::addJs('jquery.js');</code>
+			<code>ContentComposer::addJs('jquery-ui.js');</code>
+			<code>ContentComposer::addJs('cool-slider.js');</code>
+			<code>ContentComposer::addJs('cool-carousel.js');</code>
+			<code>ContentComposer::addJs('some-plugin.js');</code>
+			<code>...</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>IIFE</h2>
+		<pre>
+			<code>(function() {</code>
+			<code>	$('body').html('Hello world!');</code>
+			<code>}());</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Лучше так</h2>
+		<pre>
+			<code>;(function(<mark>$, _</mark>) {</code>
+			<code>	$('body').html(_.first([1, 2, 3, 4]));</code>
+			<code>}(<mark>jQuery, _</mark>));</code>
+		</pre>
+	</div></section>
+	<section class="slide cover w"><div>
+		<img src="pictures/clewv.jpg" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<ol>
+			<li>Нужно следить за зависимостями</li>
+			<li class="next">Возможны конфликты имен переменных</li>
+			<li class="next">Результат плохо сжимается</li>
+			<li class="next">Нужно учитывать порядок</li>
+			<img class="next" src="pictures/feelsbad.jpg" height="89" width="89" alt="">
+		</ol>
+	</div></section>
+	<section class="slide cover h"><div>
+		<img src="pictures/123.JPG" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<ul class="no-style">
+			<li>и ещё</li>
+			<li class="next">функциональный рост проекта</li>
+			<li class="next">технологический рост проекта</li>
+			<li class="next">управление версиями</li>
+			<img class="next" src="pictures/3.jpg" height="112" width="112" alt="">
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Решение</h2>
+		<ul>
+			<li><b>изолированные</b> модули</li>
+			<li>не использовать Global scope</li>
+			<img src="pictures/avoid_globals.png" height="214" width="527" alt="">
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h3>Решение</h3>
+		<ul>
+			<li class="next">AMD</li>
+			<li class="next">CommonJS</li>
+			<li class="next">ES6 Modules</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h3>Provided by</h3>
+		<ul>
+			<li class="next">RequireJS</li>
+			<li class="next">Browserify</li>
+			<li class="next">Webpack</li>
+			<li class="next">Babel</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h3>и чего?</h3>
+		<ol>
+			<li class="next">реализация скрыта</li>
+			<li class="next">нет глобальных переменных</li>
+			<li class="next">простой внешний API, сложная реализация внутри</li>
+			<li class="next">легко изменять с минимальным влиянием на все приложение</li>
+			<li class="next">проще тестировать ;)</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<h2>AMD</h2>
+		<p><b>Asynchronous module definition (AMD)<b> is a JavaScript specification that defines an API for defining code modules and their dependencies, and loading them asynchronously if desired.</p>
+	</div></section>
+	<section class="slide"><div>
+		<ol>
+			<li>best practices of dojo</li>
+			<li>модули и зависимости загружаются асинхронно</li>
+			<li>обеспечивает загрузку "по требованию"</li>
+			<li>гарантирует подгрузку зависимостей</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<pre>
+			<code>define('myModule',</code>
+			<code>	['foo', 'bar'],</code>
+			<code>	function(foo, bar) {</code>
+			<code>		var myModule = {</code>
+			<code>			<mark class="comment">// some code</mark></code>
+			<code>		}</code>
+			<code>	return myModule;</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<pre>
+			<code>require('myModule',</code>
+			<code>	function(myModule) {</code>
+			<code>		myModule.something();</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide cover h" style="background: #fff;"><div>
+		<img src="pictures/requirejs-logo.svg" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<h3>AMD</h3>
+		<h3>объявляем модуль</h3>
+		<pre>
+			<code>define(['jquery', 'underscore'],</code>
+			<code>	function($, _) {</code>
+			<code>		return function() {</code>
+			<code>			<mark class="comment">// some code</mark></code>
+			<code>		}</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h3>используем</h3>
+		<pre>
+			<code>requirejs(['jquery', 'underscore'], function($, _) {</code>
+			<code>	$('body').html(_.first[1,2,3]);</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h3>config</h3>
+		<pre>
+			<code class="next">requirejs.config({...});</code>
+			<code class="next">baseUrl: 'js/vendor'</code>
+			<code class="next">paths: { jquery: 'jquery.min' }</code>
+			<code class="next"><pre>
+				<code>shim: {
+	'backbone': {
+		deps: ['underscore', 'jquery'],
+		exports: 'Backbone'
+	}
+}
+			</pre></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>r.js</h2>
+		<p>собирает скрипты вместе и сжимает через UglifyJS<br>можно передавать параметры прямо в консоль:</p>
+		<code>node r.js -o baseUrl=. paths.plugin=path/to/plugin name=main out=main-build.js</code>
+	</div></section>
+	<section class="slide"><div>
+		<h3>или передать конфиг в отдельном файле (<a href="https://github.com/jrburke/r.js/blob/master/build/example.build.js">пример</a>):</h3>
+		<pre>
+			<code>({</code>
+			<code>	baseUrl: '.',</code>
+			<code>	paths: {</code>
+			<code>		plguin: 'path/to/plugin'</code>
+			<code>	},</code>
+			<code>	name: 'main',</code>
+			<code>	out: 'main-build.js'</code>
+			<code>})</code>
+		</pre>
+	</div></section>
+	<section class="slide cover h"><div>
+		<img src="pictures/problem.jpg">
+	</div></section>
+	<section class="slide"><div>
+		<h3>Лишняя обертка</h3>
+		<pre>
+			<code><mark class="important">define(function() {</mark></code>
+			<code>	...</code>
+			<code><mark class="important">})</mark></code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h3>Много зависимостей?...</h3>
+		<pre style="font-size: 18px;">
+			<code>define([</code>
+			<code>	'jquery',</code>
+			<code>	'underscore',</code>
+			<code>	'backbone',</code>
+			<code>	'some/moudle',</code>
+			<code>	'cool-carousel',</code>
+			<code>	'cool-gallery',</code>
+			<code>	'cool-slider'],</code>
+			<code>	function($, _, Backbone, Module, Carousel, Gallery, Slider) {</code>
+			<code>		<mark class="comment">// some code</mark></code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h3>AMD?</h3>
+		<ul>
+			<li class="next">много HTTP запросов</li>
+			<li class="next">отдельные версии библиотек</li>
+			<li class="next">создан изначально для приложений</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>CommonJS</h2>
+		<p><b>CommonJS<b> is a project with the goal of specifying an ecosystem for JavaScript outside the browser.</p>
+	</div></section>
+	<section class="slide"><div>
+		<figure>
+			<blockquote>
+				<p>CommonJS are a volunteer working group which aim to design, prototype and standardize JavaScript APIs. To date they've attempted to ratify standards for both modules and packages. The CommonJS module proposal specifies a simple API for declaring modules server-side and unlike AMD attempts to cover a broader set of concerns such as io, filesystem, promises and more.</p>
+			</blockquote>
+			<figcaption>Addy Osmani, Writing Modular JavaScript With AMD, CommonJS & ES Harmony</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h3>RequireJS CommonJS style</h3>
+		<pre>
+			<code>define(function(require, exports, module) {</code>
+			<code>	var $ = require('jquery'),</code>
+			<code>		_ = require('underscore');</code>
+			<code>		return function() {</code>
+			<code>			<mark class="comment">// some code</mark></code>
+			<code>		}</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide cover h"><div>
+		<img src="pictures/browserify.png">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Browserify</h2>
+		<ol>
+			<li>node-style модули</li>
+			<li>нет лишних оберток</li>
+			<li>доступны npm пакеты</li>
+			<li>строит <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a></li>
+			<li>собирает все в один бандл</li>
+		</ol>
+	</div></section>
+	<section class="slide"><div>
+		<img src="pictures/npm-logo.svg" width="100px">
+		<p>npm - пакетный менеджер для node.js. С его помощью можно управлять модулями и зависимостями.<br>Устанавливается вместе с nodejs.<br>198 191 total packages</p>
+	</div></section>
+	<section class="slide"><div>
+		<code>npm install -g browserify</code>
+		<p>используем пакеты:</p>
+		<code>npm install jquery</code>
+		<pre>
+			<code>var $ = require('jquery');</code>
+			<code>	module = require('path/to/module');</code>
+			<code>	module.doSomething();</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Импортируем свои модули</h2>
+		<pre>
+			<code>module.exports = function(value) {</code>
+			<code>	return value * value;</code>
+			<code>};</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h3>или</h3>
+		<pre>
+			<code>module.exports = {</code>
+			<code>	doSomething: function(value) {</code>
+			<code>		return value * value;</code>
+			<code>	}</code>
+			<code>};</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Собираем</h2>
+		<code>browserify main.js -o bundle.js</code>
+		<img class="next" src="pictures/pixel_cat.jpg" height="260" width="400">
+	</div></section>
+	<section class="slide"><div>
+		<h3>Watchify</h3>
+		<pre>
+			<code>"scripts": {</code>
+			<code>	"build": "browserify main.js -o bundle.js",</code>
+			<code>	"watch": "watchify main.js -o bundle.js -v"</code>
+			<code>}</code>
+		</pre>
+		<code>npm run watch</code>
+	</div></section>
+	<section class="slide"><div>
+		<h3>несколько бандлов</h3>
+		<p><a href="https://github.com/substack/factor-bundle">factor-bundle</a></p>
+		<p><code>browserify a.js b.js -p [ factor-bundle -o bundle/a.js -o bundle/b.js ] -o bundle/common.js</code></p>
+		<p><a href="https://github.com/MhMadHamster/browserify-example">пример</a></p>
+	</div></section>
+	<section class="slide"><div>
+		<h3>Cons:</h3>
+		<ol>
+			<li class="next">собирает все в один бандл</li>
+			<li class="next">приходится собирать</li>
+			<li class="next">документация не очень</li>
+			<li class="next">комьюнити не очень</li>
+			<li class="next"><b>browser</b>ify</li>
+			<li class="next">npm для node?</li>
+		</ol>
+	</div></section>
+	<section class="slide cover w" style="background: #fff;"><div>
+		<img src="pictures/what-is-webpack.png" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<h3>Полезные ссылки</h3>
+		<ul>
+			<li><a href="https://github.com/requirejs/example-multipage">requirejs multipage</a></li>
+			<li><a href="http://addyosmani.com/writing-modular-js/">writing modular javascript</a></li>
+			<li><a href="http://largescalejs.ru/">Паттерны для масштабируемых Javascript-приложений</a></li>
+			<li><a href="https://github.com/substack/browserify-handbook">Browserify handbook</a></li>
+			<li><a href="https://www.youtube.com/watch?v=VkTCL6Nqm6Y">How Instagram.com Works</a></li>
+		</ul>
+	</div></section>
+	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>
